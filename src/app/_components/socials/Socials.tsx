@@ -1,9 +1,10 @@
-import { ICONS } from '@/app/_constants';
-import { getIcon } from '@/app/_helpers/getIcon';
+import { ICONS } from '@/app/_util/constants';
+import { getIcon } from '@/app/_util/helpers/getIcon';
 import Link from 'next/link';
+import { FC } from 'react';
 import { socialsData } from './socialsData';
 
-export default function Socials() {
+const Socials: FC = () => {
   return (
     <div className="flex items-center gap-x-[15px]">
       {socialsData?.map(item => (
@@ -17,4 +18,6 @@ export default function Socials() {
       ))}
     </div>
   );
-}
+};
+
+export default Socials;

@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { FC } from 'react';
 
-export default function Logo() {
+const Logo: FC = () => {
   return (
     <Link href="/" className="flex items-center gap-x-2.5">
       <Image
@@ -16,4 +17,6 @@ export default function Logo() {
       </span>
     </Link>
   );
-}
+};
+
+export default Logo;

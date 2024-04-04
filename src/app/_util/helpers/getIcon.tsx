@@ -1,4 +1,4 @@
-import { icons } from '../_icons';
+import { icons } from '../icons';
 
 export const getIcon = (name: string) => {
   const IconComponent = icons[name];

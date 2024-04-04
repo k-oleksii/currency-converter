@@ -14,7 +14,7 @@ const NavList: FC<INavList> = ({ component = 'header' }) => {
   const pathname = usePathname();
 
   const navListClasses = classNames('flex ', {
-    'flex-col space-y-5 font-medium': component === 'footer',
+    'flex-col space-y-4 font-medium': component === 'footer',
     'items-center space-x-12': component === 'header',
   });
 

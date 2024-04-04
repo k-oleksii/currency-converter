@@ -24,7 +24,6 @@ const config: Config = {
       maxWidth: {
         container: '1166px',
         containerSm: '865px',
-        laptop: '1024px',
       },
     },
   },

@@ -1,8 +1,9 @@
 import Image from 'next/image';
+import { FC } from 'react';
 import Button from '../button/Button';
 import heroImg from '/public/hero-bg.jpg';
 
-export default function Hero() {
+const Hero: FC = () => {
   return (
     <section className="relative min-h-[400px] pt-[85px] pb-[99px]">
       <div className="absolute inset-0">
@@ -42,4 +43,6 @@ export default function Hero() {
       </div>
     </section>
   );
-}
+};
+
+export default Hero;

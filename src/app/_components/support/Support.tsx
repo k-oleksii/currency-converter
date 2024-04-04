@@ -1,5 +1,5 @@
-import { ICONS } from '@/app/_constants';
-import { getIcon } from '@/app/_helpers/getIcon';
+import { ICONS } from '@/app/_util/constants';
+import { getIcon } from '@/app/_util/helpers/getIcon';
 import Link from 'next/link';
 import { FC } from 'react';
 
@@ -19,7 +19,7 @@ const Support: FC<ISupport> = ({ iconName, desc, phone }) => {
       <div className="flex flex-col flex-1 gap-y-2.5">
         <Link
           href={`tel:${phone}`}
-          className="font-medium text-darkGray leading-none"
+          className="font-medium text-darkGray leading-none hover:text-blue"
         >
           {phone}
         </Link>
