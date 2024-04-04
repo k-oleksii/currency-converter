@@ -10,8 +10,10 @@ const config: Config = {
     colors: {
       lightGray: '#f6f7ff',
       darkGray: '#1f1e25',
-      gray: '#707c87',
+      mistyGray: '#e0e1ea',
       blue: '#2c36f2',
+      lightBlue: '#2730d9',
+      gray: '#707c87',
     },
     extend: {
       backgroundImage: {
@@ -20,8 +22,9 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       maxWidth: {
-        desktopContainer: '1166px',
-        laptopContainer: '1024px',
+        container: '1166px',
+        containerSm: '865px',
+        laptop: '1024px',
       },
     },
   },
