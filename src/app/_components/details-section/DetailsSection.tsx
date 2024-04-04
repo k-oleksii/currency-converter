@@ -38,7 +38,7 @@ const DetailsSection: FC<IDetailsSection> = ({
               width="436"
               height="314"
               alt="Debit card"
-              layout="responsive"
+              className="w-full h-full object-cover"
             />
           </div>
         </div>

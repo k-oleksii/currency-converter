@@ -10,7 +10,7 @@ const Hero: FC = () => {
         <Image
           src={heroImg}
           alt="Hero"
-          layout="fill"
+          fill
           priority
           placeholder="blur"
           className="object-cover"
