@@ -18,12 +18,6 @@ const config: Config = {
       gray: '#707c87',
     },
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
-      notLast: 'not(:last-child)',
       maxWidth: {
         containerSm: '865px',
         containerMd: '962px',
