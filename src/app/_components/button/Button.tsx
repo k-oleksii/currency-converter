@@ -6,6 +6,7 @@ interface IButton {
   color?: 'light' | 'blue';
   size?: 'small' | 'medium' | 'large';
   href?: string;
+  type?: string;
   children: ReactNode;
 }
 

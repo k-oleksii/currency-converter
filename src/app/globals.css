@@ -32,4 +32,10 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+
+  .select {
+    --radix-popover-content-available-width: 100%;
+
+    max-width: var(--radix-popover-content-available-width);
+  }
 }

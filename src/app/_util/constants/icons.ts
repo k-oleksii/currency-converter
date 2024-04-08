@@ -6,4 +6,7 @@ export const ICONS = {
   yb: 'yb',
   call: 'call',
   phone: 'phone',
+  arrows: 'arrows',
+  calendar: 'calendar',
+  chevronDown: 'chevronDown',
 };

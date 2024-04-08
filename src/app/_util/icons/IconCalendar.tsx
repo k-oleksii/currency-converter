@@ -1,0 +1,27 @@
+import { FC } from 'react';
+
+export const IconCalendar: FC = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="27"
+      height="29"
+      viewBox="0 0 27 29"
+      fill="none"
+    >
+      <path d="M1 10.1828L26 10" stroke="currentColor" />
+      <path d="M6 0L6.09082 3.89677" stroke="currentColor" />
+      <path d="M21 0V4" stroke="currentColor" />
+      <path
+        d="M26 25V5C26 3.34315 24.6569 2 23 2H4C2.34315 2 1 3.34315 1 5V25C1 26.6569 2.34315 28 4 28H23C24.6569 28 26 26.6569 26 25Z"
+        stroke="currentColor"
+      />
+      <path d="M5 16H8" stroke="#C1C2CA" strokeWidth="3" />
+      <path d="M12.0908 16H15.0908" stroke="#C1C2CA" strokeWidth="3" />
+      <path d="M19.1816 16H22.1816" stroke="#C1C2CA" strokeWidth="3" />
+      <path d="M5 22H8" stroke="#C1C2CA" strokeWidth="3" />
+      <path d="M12.0908 22H15.0908" stroke="#C1C2CA" strokeWidth="3" />
+      <path d="M19.1816 22H22.1816" stroke="#C1C2CA" strokeWidth="3" />
+    </svg>
+  );
+};

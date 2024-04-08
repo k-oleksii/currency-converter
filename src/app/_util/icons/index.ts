@@ -1,5 +1,8 @@
 import { FC } from 'react';
+import { IconArrow } from './IconArrow';
+import { IconArrows } from './IconArrows';
 import { IconCabinet } from './IconCabinet';
+import { IconCalendar } from './IconCalendar';
 import { IconCall } from './IconCall';
 import { IconFb } from './IconFb';
 import { IconInst } from './IconInst';
@@ -19,4 +22,7 @@ export const icons: IIcons = {
   yb: IconYb,
   call: IconCall,
   phone: IconPhone,
+  arrows: IconArrows,
+  calendar: IconCalendar,
+  chevronDown: IconArrow,
 };

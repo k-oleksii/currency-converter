@@ -8,9 +8,11 @@ const config: Config = {
   ],
   theme: {
     colors: {
+      white: '#ffffff',
       lightGray: '#f6f7ff',
       darkGray: '#1f1e25',
       mistyGray: '#e0e1ea',
+      silver: '#c1c2ca',
       blue: '#2c36f2',
       lightBlue: '#2730d9',
       gray: '#707c87',
@@ -21,9 +23,14 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      notLast: 'not(:last-child)',
       maxWidth: {
-        container: '1166px',
         containerSm: '865px',
+        containerMd: '962px',
+        container: '1166px',
+      },
+      gridTemplateColumns: {
+        formConverter: '220px 120px',
       },
     },
   },
