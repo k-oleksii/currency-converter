@@ -1,13 +1,8 @@
+import { ISupport } from '@/app/_util/_types/types';
 import { ICONS } from '@/app/_util/constants';
 import { getIcon } from '@/app/_util/helpers/getIcon';
 import Link from 'next/link';
 import { FC } from 'react';
-
-interface ISupport {
-  iconName: string;
-  phone: string;
-  desc: string;
-}
 
 const Support: FC<ISupport> = ({ iconName, desc, phone }) => {
   return (

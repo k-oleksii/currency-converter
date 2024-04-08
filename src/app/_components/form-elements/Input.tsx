@@ -1,11 +1,6 @@
+import { IInput } from '@/app/_util/_types/types';
 import { FC } from 'react';
 import { useFormContext } from 'react-hook-form';
-
-interface IInput {
-  type: string;
-  placeholder?: string;
-  name: string;
-}
 
 export const Input: FC<IInput> = props => {
   const { register } = useFormContext();

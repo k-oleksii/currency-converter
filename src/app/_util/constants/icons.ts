@@ -9,4 +9,5 @@ export const ICONS = {
   arrows: 'arrows',
   calendar: 'calendar',
   chevronDown: 'chevronDown',
+  arrow: 'arrow',
 };

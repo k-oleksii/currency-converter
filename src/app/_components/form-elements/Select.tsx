@@ -1,19 +1,9 @@
+import { ISelect } from '@/app/_util/_types/types';
 import { ICONS } from '@/app/_util/constants';
 import { getIcon } from '@/app/_util/helpers/getIcon';
 import * as Select from '@radix-ui/react-select';
 import { FC } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
-
-interface IItem {
-  value: string;
-  name: string;
-}
-
-interface ISelect {
-  name: string;
-  defaultValue: string;
-  items: IItem[];
-}
 
 export const CustomSelect: FC<ISelect> = ({ defaultValue, items, name }) => {
   const { control } = useFormContext();

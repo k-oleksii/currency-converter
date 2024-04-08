@@ -4,6 +4,7 @@ import { IconArrows } from './IconArrows';
 import { IconCabinet } from './IconCabinet';
 import { IconCalendar } from './IconCalendar';
 import { IconCall } from './IconCall';
+import { IconChevronDown } from './IconChevronDown';
 import { IconFb } from './IconFb';
 import { IconInst } from './IconInst';
 import { IconPhone } from './IconPhone';
@@ -24,5 +25,6 @@ export const icons: IIcons = {
   phone: IconPhone,
   arrows: IconArrows,
   calendar: IconCalendar,
-  chevronDown: IconArrow,
+  chevronDown: IconChevronDown,
+  arrow: IconArrow,
 };

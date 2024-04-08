@@ -59,7 +59,9 @@ export const DatePicker: FC<IDatePicker> = ({ name }) => {
 
             <div className="absolute flex items-center right-[17px] top-1/2 -translate-y-1/2">
               <Popover.Root>
-                <Popover.Trigger>{getIcon(ICONS.calendar)}</Popover.Trigger>
+                <Popover.Trigger className="text-gray hover:text-blue transition-all">
+                  {getIcon(ICONS.calendar)}
+                </Popover.Trigger>
                 <Popover.Content
                   className="bg-white border border-silver rounded"
                   side="right"

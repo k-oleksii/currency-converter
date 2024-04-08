@@ -29,9 +29,6 @@ const config: Config = {
         containerMd: '962px',
         container: '1166px',
       },
-      gridTemplateColumns: {
-        formConverter: '220px 120px',
-      },
     },
   },
   plugins: [],
