@@ -1,13 +1,7 @@
+import { IButton } from '@/app/_util/_types/types';
 import classNames from 'classnames';
 import Link from 'next/link';
-import { FC, ReactNode } from 'react';
-
-interface IButton {
-  color?: 'light' | 'blue';
-  size?: 'small' | 'medium' | 'large';
-  href?: string;
-  children: ReactNode;
-}
+import { FC } from 'react';
 
 const Button: FC<IButton> = ({
   color = 'blue',
