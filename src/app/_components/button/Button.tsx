@@ -1,4 +1,4 @@
-import { IButton } from '@/app/_util/_types/types';
+import { IButton } from '@/app/_util/types/types';
 import classNames from 'classnames';
 import Link from 'next/link';
 import { FC } from 'react';

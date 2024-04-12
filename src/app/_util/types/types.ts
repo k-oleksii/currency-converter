@@ -1,13 +1,11 @@
 import { ReactNode } from 'react';
 
 export interface IItem {
-  value: string;
-  name: string;
+  currency: string;
 }
 
 export interface ISelect {
   name: string;
-  defaultValue: string;
   items: IItem[];
 }
 

@@ -1,11 +1,11 @@
-import { ISelect } from '@/app/_util/_types/types';
 import { ICONS } from '@/app/_util/constants';
 import { getIcon } from '@/app/_util/helpers/getIcon';
+import { ISelect } from '@/app/_util/types/types';
 import * as Select from '@radix-ui/react-select';
 import { FC } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
-export const CustomSelect: FC<ISelect> = ({ defaultValue, items, name }) => {
+export const CustomSelect: FC<ISelect> = ({ items, name }) => {
   const { control } = useFormContext();
 
   return (
@@ -13,7 +13,6 @@ export const CustomSelect: FC<ISelect> = ({ defaultValue, items, name }) => {
       <Controller
         name={name}
         control={control}
-        defaultValue={defaultValue}
         render={({ field }) => (
           <Select.Root
             onValueChange={newValue => {
@@ -30,17 +29,19 @@ export const CustomSelect: FC<ISelect> = ({ defaultValue, items, name }) => {
             <Select.SelectContent
               position="popper"
               sideOffset={5}
-              className="min-w-[127px] select w-full right-0 bg-white border border-silver rounded overflow-hidden	"
+              className="min-w-[127px] max-h-[300px] select w-full right-0 bg-white border border-silver rounded overflow-hidden	"
             >
-              {items?.map(item => (
-                <Select.Item
-                  key={item.value}
-                  value={item.value}
-                  className="px-[17px] py-2 font-semibold font-xl uppercase text-gray cursor-pointer hover:bg-lightGray border-b border-silver last:border-b-0"
-                >
-                  <Select.ItemText>{item.name}</Select.ItemText>
-                </Select.Item>
-              ))}
+              <Select.Viewport>
+                {items?.map(item => (
+                  <Select.Item
+                    key={item.currency}
+                    value={item.currency}
+                    className="px-[17px] py-2 font-semibold font-xl uppercase text-gray cursor-pointer hover:bg-lightGray border-b border-silver last:border-b-0"
+                  >
+                    <Select.ItemText>{item.currency}</Select.ItemText>
+                  </Select.Item>
+                ))}
+              </Select.Viewport>
             </Select.SelectContent>
           </Select.Root>
         )}

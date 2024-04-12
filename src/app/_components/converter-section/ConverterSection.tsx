@@ -1,7 +1,10 @@
+import { api } from '@/app/_util/api';
 import { FC } from 'react';
 import ConverterForm from './form/ConverterForm';
 
-const ConvertSection: FC = () => {
+const ConvertSection: FC = async () => {
+  const { exchangeRate } = await api.getCurrency();
+
   return (
     <section className="bg-lightGray py-20">
       <div className="max-w-containerMd w-full mx-auto">
@@ -10,7 +13,7 @@ const ConvertSection: FC = () => {
             Конвертер валют
           </h2>
 
-          <ConverterForm />
+          <ConverterForm data={exchangeRate} />
         </div>
       </div>
     </section>

@@ -1,4 +1,4 @@
-import { IInput } from '@/app/_util/_types/types';
+import { IInput } from '@/app/_util/types/types';
 import { FC } from 'react';
 import { useFormContext } from 'react-hook-form';
 
@@ -12,6 +12,7 @@ export const Input: FC<IInput> = props => {
         placeholder={props.placeholder}
         {...register(props.name)}
         className="w-full h-[60px] p-2.5 font-semibold font-xl text-gray text-center border border-silver rounded"
+        autoComplete="off"
       />
     </div>
   );
