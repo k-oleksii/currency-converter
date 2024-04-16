@@ -1,12 +1,11 @@
-const url = 'https://api.privatbank.ua/p24api/exchange_rates?date=12.04.2024';
+// const url = 'https://api.privatbank.ua/p24api/exchange_rates';
+const url = 'https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange';
 
 export const api = {
-  async getCurrency() {
-    const response = await fetch(url, {
+  async getCurrency(date: string) {
+    const response = await fetch(`${url}?date=${date}&json`, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      cache: 'no-cache',
     });
 
     if (!response.ok) {

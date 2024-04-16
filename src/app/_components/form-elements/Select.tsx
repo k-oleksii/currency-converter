@@ -5,7 +5,7 @@ import * as Select from '@radix-ui/react-select';
 import { FC } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
-export const CustomSelect: FC<ISelect> = ({ items, name }) => {
+export const CustomSelect: FC<ISelect> = ({ items, name, onChange }) => {
   const { control } = useFormContext();
 
   return (
@@ -18,6 +18,7 @@ export const CustomSelect: FC<ISelect> = ({ items, name }) => {
             onValueChange={newValue => {
               field.onChange(newValue);
             }}
+            onOpenChange={onChange}
             value={field.value}
           >
             <Select.Trigger className="flex justify-between items-center gap-2 w-full h-[60px] px-[17px] py-4 font-semibold font-xl uppercase text-gray text-center border border-silver rounded">
@@ -34,11 +35,11 @@ export const CustomSelect: FC<ISelect> = ({ items, name }) => {
               <Select.Viewport>
                 {items?.map(item => (
                   <Select.Item
-                    key={item.currency}
-                    value={item.currency}
+                    key={item.r030}
+                    value={item.cc}
                     className="px-[17px] py-2 font-semibold font-xl uppercase text-gray cursor-pointer hover:bg-lightGray border-b border-silver last:border-b-0"
                   >
-                    <Select.ItemText>{item.currency}</Select.ItemText>
+                    <Select.ItemText>{item.cc}</Select.ItemText>
                   </Select.Item>
                 ))}
               </Select.Viewport>

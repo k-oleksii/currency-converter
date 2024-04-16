@@ -1,50 +1,104 @@
 'use client';
 
+import { api } from '@/app/_util/api';
 import { ICONS } from '@/app/_util/constants';
+import {
+  fromConvertCurrency,
+  toConvertCurrency,
+} from '@/app/_util/helpers/converter';
 import { getIcon } from '@/app/_util/helpers/getIcon';
-import { useEffect } from 'react';
+import { IExchangeRateItem } from '@/app/_util/types/types';
+import { format } from 'date-fns';
+import { FC, useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import Button from '../../button/Button';
 import { DatePicker } from '../../form-elements/DatePicker';
 import { Input } from '../../form-elements/Input';
 import { CustomSelect } from '../../form-elements/Select';
 
-const ConverterForm = ({ data }) => {
+const ConverterForm: FC = () => {
+  const [fromCurrencyChanged, setFromCurrencyChanged] = useState(false);
+  const [toCurrencyChanged, setToCurrencyChanged] = useState(false);
+  const [exchangeData, setExchangeData] = useState<IExchangeRateItem[]>([]);
+
   const methods = useForm({
     mode: 'onTouched',
+
     defaultValues: {
       from: {
         currency: '0',
-        currency_type: 'UAN',
+        currency_type: 'UAH',
       },
       to: {
-        currency: '0.00',
+        currency: '0',
         currency_type: 'USD',
       },
       date: new Date(),
     },
   });
 
-  const fromCurrency = methods.watch('from');
-  const toCurrency = methods.watch('to');
+  const { watch, setValue, handleSubmit } = methods;
+
+  const fromCurrency = watch('from');
+  const toCurrency = watch('to');
+  const defaultDate = watch('date');
 
   useEffect(() => {
-    const cur = data?.find(item => item.currency === toCurrency.currency_type);
+    const fetchData = async () => {
+      try {
+        const response = await api.getCurrency(format(defaultDate, 'yyyyMMdd'));
 
-    if (fromCurrency.currency || fromCurrency.currency_type) {
-      const result = parseFloat(fromCurrency.currency) / Number(cur.saleRateNB);
-      methods.setValue('to.currency', result.toFixed(2));
-    }
-  }, [fromCurrency.currency, fromCurrency.currency_type]);
+        const uahCurrency = {
+          r030: 980,
+          txt: 'Українська гривня',
+          rate: 1,
+          cc: 'UAH',
+          exchangedate: format(defaultDate, 'dd.MM.yyyy'),
+        };
+
+        const updatedExchangeData = [...response, uahCurrency];
+
+        setExchangeData(updatedExchangeData);
+      } catch (error) {
+        throw new Error('Failed to fetch data' + error);
+      }
+    };
+
+    fetchData();
+  }, [defaultDate]);
 
   useEffect(() => {
-    const cur = data?.find(item => item.currency === toCurrency.currency_type);
-
-    if (toCurrency.currency || toCurrency.currency_type) {
-      const result = parseFloat(toCurrency.currency) * Number(cur.saleRateNB);
-      methods.setValue('from.currency', result.toFixed(2));
+    if (fromCurrencyChanged) {
+      const result = fromConvertCurrency(
+        fromCurrency.currency,
+        fromCurrency.currency_type,
+        toCurrency.currency_type,
+        exchangeData
+      );
+      setValue('to.currency', result);
+      setFromCurrencyChanged(false);
     }
-  }, [toCurrency.currency, toCurrency.currency_type]);
+
+    if (toCurrencyChanged) {
+      const result = toConvertCurrency(
+        toCurrency.currency,
+        toCurrency.currency_type,
+        fromCurrency.currency_type,
+        exchangeData
+      );
+      setValue('from.currency', result);
+      setToCurrencyChanged(false);
+    }
+  }, [
+    fromCurrency.currency,
+    fromCurrency.currency_type,
+    toCurrency.currency_type,
+    toCurrency.currency,
+    exchangeData,
+    fromCurrencyChanged,
+    toCurrencyChanged,
+    setValue,
+  ]);
 
   const onSubmit = (data: any) => {
     console.log('form data', data);
@@ -52,16 +106,25 @@ const ConverterForm = ({ data }) => {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex items-center gap-x-12">
           <div className="flex flex-col flex-1 gap-y-[30px]">
             <span className="font-medium font-xl text-gray">В мене є:</span>
             <div className="flex flex-wrap gap-x-[15px] gap-y-6">
               <div className="w-[220px]">
-                <Input type="text" name="from.currency" />
+                <Input
+                  type="text"
+                  name="from.currency"
+                  placeholder="0"
+                  onChange={() => setFromCurrencyChanged(true)}
+                />
               </div>
               <div className="flex-1">
-                <CustomSelect name="from.currency_type" items={data} />
+                <CustomSelect
+                  name="from.currency_type"
+                  items={exchangeData}
+                  onChange={() => setFromCurrencyChanged(true)}
+                />
               </div>
               <div className="w-[220px]">
                 <DatePicker name="date" />
@@ -75,10 +138,19 @@ const ConverterForm = ({ data }) => {
             </span>
             <div className="flex flex-wrap justify-end gap-x-[15px] gap-y-6">
               <div className="w-[220px]">
-                <Input type="text" name="to.currency" />
+                <Input
+                  type="text"
+                  name="to.currency"
+                  placeholder="0.00"
+                  onChange={() => setToCurrencyChanged(true)}
+                />
               </div>
               <div className="flex-1">
-                <CustomSelect name="to.currency_type" items={data} />
+                <CustomSelect
+                  name="to.currency_type"
+                  items={exchangeData}
+                  onChange={() => setToCurrencyChanged(true)}
+                />
               </div>
               <div className="w-[220px]">
                 <Button type="submit" size="large">

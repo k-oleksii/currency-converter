@@ -1,18 +1,22 @@
-import { ReactNode } from 'react';
+import { ChangeEvent, ReactNode } from 'react';
 
 export interface IItem {
-  currency: string;
+  r030: number;
+  cc: string;
+  exchangedate: string;
 }
 
 export interface ISelect {
   name: string;
-  items: IItem[];
+  items: IExchangeRateItem[];
+  onChange?: () => void;
 }
 
 export interface IInput {
   type: string;
   placeholder?: string;
   name: string;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface IButton {
@@ -36,4 +40,14 @@ export interface ISupport {
   iconName: string;
   phone: string;
   desc: string;
+}
+export interface IExchangeRateItem {
+  r030: number;
+  cc: string;
+  rate: number;
+  exchangedate: string;
+}
+
+export interface IExchangeData {
+  data: IExchangeRateItem[];
 }
