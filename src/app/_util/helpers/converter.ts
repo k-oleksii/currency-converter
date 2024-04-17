@@ -2,18 +2,18 @@ import { IExchangeRateItem } from '@/app/_util/types/types';
 
 export const fromConvertCurrency = (
   amount: string,
-  fromCurrency: string,
-  toCurrency: string,
+  fromCurr: string,
+  toCurr: string,
   exchangeRates: IExchangeRateItem[]
 ) => {
   let fromRate = 1,
     toRate = 1;
 
-  exchangeRates.forEach((item: IExchangeRateItem) => {
-    if (item.cc === fromCurrency) {
+  exchangeRates?.forEach((item: IExchangeRateItem) => {
+    if (item.cc === fromCurr) {
       fromRate = item.rate;
     }
-    if (item.cc === toCurrency) {
+    if (item.cc === toCurr) {
       toRate = item.rate;
     }
   });

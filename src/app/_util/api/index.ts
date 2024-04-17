@@ -5,7 +5,6 @@ export const api = {
   async getCurrency(date: string) {
     const response = await fetch(`${url}?date=${date}&json`, {
       method: 'GET',
-      cache: 'no-cache',
     });
 
     if (!response.ok) {

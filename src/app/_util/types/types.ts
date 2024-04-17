@@ -1,4 +1,4 @@
-import { ChangeEvent, ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 export interface IItem {
   r030: number;
@@ -9,14 +9,16 @@ export interface IItem {
 export interface ISelect {
   name: string;
   items: IExchangeRateItem[];
-  onChange?: () => void;
+  handleFocus?: () => void;
+  handleBlur?: () => void;
 }
 
 export interface IInput {
   type: string;
   placeholder?: string;
   name: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleFocus?: () => void;
+  handleBlur?: () => void;
 }
 
 export interface IButton {
