@@ -162,12 +162,13 @@ const ConverterForm: FC = () => {
           <div className="flex flex-col gap-2">
             {errors.from?.curr && (
               <span className="text-darkRed text-sm">
-                Поле <strong>"В мене є:"</strong> {errors.from?.curr.message}
+                Поле <strong>"В мене є:"</strong> - {errors.from?.curr.message}
               </span>
             )}
             {errors.to?.curr && (
               <span className="text-darkRed text-sm">
-                Поле <strong>"Хочу придбати:"</strong> {errors.to?.curr.message}
+                Поле <strong>"Хочу придбати:"</strong> -{' '}
+                {errors.to?.curr.message}
               </span>
             )}
           </div>

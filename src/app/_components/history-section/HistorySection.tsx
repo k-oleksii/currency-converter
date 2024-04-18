@@ -2,15 +2,34 @@
 
 import { getSortData } from '@/app/_util/helpers/getSortData';
 import { useHistoryStore } from '@/app/_util/store/history';
-import { FC } from 'react';
+import { IHistory } from '@/app/_util/types/types';
+import { FC, useEffect, useState } from 'react';
 import Button from '../button/Button';
 import Empty from '../empty/Empty';
+import Loading from '../loading/Loading';
 import HistoryItem from './HistoryItem';
 
 const HistorySection: FC = () => {
   const { history, clearHistory, removeHistory } = useHistoryStore();
+  const [loading, setLoading] = useState(true);
+  const [dataHistory, setDataHistory] = useState<IHistory[]>([]);
 
-  const historyItemJSX = getSortData(history)?.map(item => (
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getSortData(history);
+
+        setDataHistory(data);
+        setLoading(false);
+      } catch (error) {
+        throw new Error('Error fetching data:' + error);
+      }
+    };
+
+    fetchData();
+  }, [history]);
+
+  const historyItemJSX = dataHistory?.map(item => (
     <HistoryItem key={item.id} {...item} removeHistory={removeHistory} />
   ));
 
@@ -28,7 +47,9 @@ const HistorySection: FC = () => {
               </Button>
             </div>
           </div>
-          {history.length === 0 ? (
+          {loading ? (
+            <Loading />
+          ) : dataHistory.length === 0 ? (
             <Empty text="Your history is empty!" />
           ) : (
             <div className="grid grid-cols-2 gap-y-4 gap-x-12">

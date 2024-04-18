@@ -5,9 +5,9 @@ export const CurrencySchema = z.object({
     curr: z
       .string()
       .regex(/^\d+(\.\d+)?$/, 'Повинно містити число')
-      .min(1, 'Число має бути більшим за 0')
+      .min(1, 'Значення має бути більшим за 0')
       .refine(value => parseFloat(value) > 0, {
-        message: 'Число має бути більшим за 0',
+        message: 'Значення має бути більшим за 0',
       })
       .nullable(),
     curr_code: z.string(),
@@ -16,9 +16,9 @@ export const CurrencySchema = z.object({
     curr: z
       .string()
       .regex(/^\d+(\.\d+)?$/, 'Повинно містити число')
-      .min(1, 'Число має бути більшим за 0')
+      .min(1, 'Значення має бути більшим за 0')
       .refine(value => parseFloat(value) > 0, {
-        message: 'Число має бути більшим за 0',
+        message: 'Значення має бути більшим за 0',
       })
       .nullable(),
     curr_code: z.string(),
