@@ -13,11 +13,13 @@ export const Input: FC<IInput> = props => {
         render={({ field }) => (
           <input
             type={props.type}
-            {...field}
+            value={field.value || ''}
+            onChange={field.onChange}
             onFocus={props.handleFocus}
             onBlur={props.handleBlur}
             placeholder={props.placeholder}
             className="w-full h-[60px] p-2.5 font-semibold font-xl text-gray text-center border border-silver rounded"
+            inputMode="numeric"
           />
         )}
       />

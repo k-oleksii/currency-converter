@@ -41,7 +41,7 @@ export interface IHistory {
   };
   id: string;
   date: string;
-  removeHistory?: (id: string) => void;
+  removeHistory: (id: string) => void;
 }
 
 export interface ISupport {
