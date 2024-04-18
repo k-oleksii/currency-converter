@@ -1,12 +1,17 @@
-import { historyData } from '@/app/_mock-data/historyData';
+'use client';
+
 import { getSortData } from '@/app/_util/helpers/getSortData';
+import { useHistoryStore } from '@/app/_util/store/history';
 import { FC } from 'react';
 import Button from '../button/Button';
+import Empty from '../empty/Empty';
 import HistoryItem from './HistoryItem';
 
 const HistorySection: FC = () => {
-  const historyItemJSX = getSortData(historyData)?.map(item => (
-    <HistoryItem key={item.id} {...item} />
+  const { history, clearHistory, removeHistory } = useHistoryStore();
+
+  const historyItemJSX = getSortData(history)?.map(item => (
+    <HistoryItem key={item.id} {...item} removeHistory={removeHistory} />
   ));
 
   return (
@@ -18,12 +23,18 @@ const HistorySection: FC = () => {
               Історія конвертації
             </h3>
             <div className="w-[187px]">
-              <Button type="button" size="small">
+              <Button type="button" size="small" onClick={clearHistory}>
                 Очистити історію
               </Button>
             </div>
           </div>
-          <div className="columns-2 gap-x-12">{historyItemJSX}</div>
+          {history.length === 0 ? (
+            <Empty text="Your history is empty!" />
+          ) : (
+            <div className="grid grid-cols-2 gap-y-4 gap-x-12">
+              {historyItemJSX}
+            </div>
+          )}
         </div>
       </div>
     </section>

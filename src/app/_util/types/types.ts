@@ -27,15 +27,21 @@ export interface IButton {
   href?: string;
   type?: 'button' | 'submit' | 'reset' | undefined;
   children: ReactNode;
+  onClick?: () => void;
 }
 
 export interface IHistory {
+  from: {
+    curr: string;
+    curr_code: string;
+  };
+  to: {
+    curr: string;
+    curr_code: string;
+  };
   id: string;
   date: string;
-  inner_currency: string;
-  inner_currency_name: string;
-  outer_currency: string;
-  outer_currency_name: string;
+  removeHistory?: (id: string) => void;
 }
 
 export interface ISupport {

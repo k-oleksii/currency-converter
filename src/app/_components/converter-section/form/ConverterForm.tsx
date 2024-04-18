@@ -5,8 +5,10 @@ import {
   fromConvertCurrency,
   toConvertCurrency,
 } from '@/app/_util/helpers/converter';
+import { getGenerateID } from '@/app/_util/helpers/getGenerateId';
 import { getIcon } from '@/app/_util/helpers/getIcon';
 import { useGetExchangeData } from '@/app/_util/hooks/useGetExchangeData';
+import { useHistoryStore } from '@/app/_util/store/history';
 import { FC, useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import Button from '../../button/Button';
@@ -18,6 +20,7 @@ const ConverterForm: FC = () => {
   const [currentField, setCurrentField] = useState<null | string>(null);
   const [date, setDate] = useState<Date>(new Date());
   const exchangeData = useGetExchangeData(date);
+  const { addHistory } = useHistoryStore();
 
   const methods = useForm({
     mode: 'onTouched',
@@ -78,7 +81,9 @@ const ConverterForm: FC = () => {
   };
 
   const onSubmit = (data: any) => {
-    console.log('form data', data);
+    const id = getGenerateID();
+
+    addHistory({ id, ...data });
   };
 
   return (

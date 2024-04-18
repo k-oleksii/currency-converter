@@ -23,6 +23,7 @@ const config: Config = {
         containerMd: '962px',
         container: '1166px',
       },
+      hoverHistory: {},
     },
   },
   plugins: [],
