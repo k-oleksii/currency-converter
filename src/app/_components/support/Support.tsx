@@ -1,6 +1,6 @@
-import { ISupport } from '@/app/_util/_types/types';
 import { ICONS } from '@/app/_util/constants';
 import { getIcon } from '@/app/_util/helpers/getIcon';
+import { ISupport } from '@/app/_util/types/types';
 import Link from 'next/link';
 import { FC } from 'react';
 

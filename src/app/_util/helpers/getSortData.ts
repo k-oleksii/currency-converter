@@ -1,4 +1,4 @@
-import { IHistory } from '../_types/types';
+import { IHistory } from '../types/types';
 
 export const getSortData = (data: IHistory[]) => {
   const sortData = data

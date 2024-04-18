@@ -1,20 +1,24 @@
 import { ReactNode } from 'react';
 
 export interface IItem {
-  value: string;
-  name: string;
+  r030: number;
+  cc: string;
+  exchangedate: string;
 }
 
 export interface ISelect {
   name: string;
-  defaultValue: string;
-  items: IItem[];
+  items: IExchangeRateItem[];
+  handleFocus?: () => void;
+  handleBlur?: () => void;
 }
 
 export interface IInput {
   type: string;
   placeholder?: string;
   name: string;
+  handleFocus?: () => void;
+  handleBlur?: () => void;
 }
 
 export interface IButton {
@@ -38,4 +42,14 @@ export interface ISupport {
   iconName: string;
   phone: string;
   desc: string;
+}
+export interface IExchangeRateItem {
+  r030: number;
+  cc: string;
+  rate: number;
+  exchangedate: string;
+}
+
+export interface IExchangeData {
+  data: IExchangeRateItem[];
 }

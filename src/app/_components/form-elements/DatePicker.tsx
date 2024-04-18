@@ -1,82 +1,77 @@
 import { ICONS } from '@/app/_util/constants';
 import { getIcon } from '@/app/_util/helpers/getIcon';
 import * as Popover from '@radix-ui/react-popover';
-import { format, isValid, parse } from 'date-fns';
-import { FC, useEffect, useState } from 'react';
+import { format } from 'date-fns';
+import { FC, useState } from 'react';
 import { DayPicker } from 'react-day-picker';
 import { Controller, useFormContext } from 'react-hook-form';
 
 interface IDatePicker {
   name: string;
+  handleFocus: () => void;
+  handleBlur: () => void;
 }
 
-export const DatePicker: FC<IDatePicker> = ({ name }) => {
-  const { control, setValue } = useFormContext();
-  const [selected, setSelected] = useState<Date | undefined>(new Date());
+export const DatePicker: FC<IDatePicker> = ({
+  name,
+  handleFocus,
+  handleBlur,
+}) => {
+  const { control } = useFormContext();
   const [inputValue, setInputValue] = useState<string>(
     format(new Date(), 'dd.MM.y')
   );
-
-  useEffect(() => {
-    setValue(name, selected);
-  }, [name, selected, setValue]);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setInputValue(value);
-    const date = parse(value, 'dd.MM.y', new Date());
-    if (isValid(date)) {
-      setSelected(date);
-    } else {
-      setSelected(undefined);
-    }
-  };
-
-  const handleDateSelect = (newDate: Date | undefined) => {
-    setSelected(newDate);
-    if (newDate) {
-      setInputValue(format(newDate, 'dd.MM.y'));
-    } else {
-      setInputValue('');
-    }
-    setValue(name, newDate);
-  };
 
   return (
     <div className="relative">
       <Controller
         name={name}
         control={control}
-        render={() => (
+        render={({ field }) => (
           <>
             <input
               type="text"
               placeholder={format(new Date(), 'dd.MM.y')}
               value={inputValue}
-              onChange={handleInputChange}
               className="w-full h-[60px] p-2.5 pr-12 font-semibold font-xl text-gray text-center border border-silver rounded"
+              readOnly
             />
 
             <div className="absolute flex items-center right-[17px] top-1/2 -translate-y-1/2">
               <Popover.Root>
-                <Popover.Trigger className="text-gray hover:text-blue transition-all">
+                <Popover.Trigger
+                  onFocus={handleFocus}
+                  className="text-gray hover:text-blue transition-all"
+                >
                   {getIcon(ICONS.calendar)}
                 </Popover.Trigger>
                 <Popover.Content
+                  onCloseAutoFocus={handleBlur}
                   className="bg-white border border-silver rounded"
                   side="right"
                   sideOffset={30}
                 >
                   <DayPicker
                     mode="single"
-                    defaultMonth={selected}
-                    selected={selected}
-                    onSelect={handleDateSelect}
+                    defaultMonth={new Date()}
+                    selected={field.value}
+                    onSelect={day => {
+                      const newDay = day as Date;
+                      field.onChange(newDay);
+                      setInputValue(format(newDay, 'dd.MM.y'));
+                    }}
+                    captionLayout="dropdown-buttons"
+                    fromYear={2010}
+                    toYear={new Date().getFullYear()}
                     showOutsideDays
                     classNames={{
                       caption:
                         'flex justify-center py-2 mb-2 relative items-center',
-                      caption_label: 'text-sm font-medium text-gray',
+                      caption_label: 'hidden',
+                      caption_dropdowns:
+                        'text-sm flex flex-col items-center gap-2',
+                      dropdown_month: 'flex items-center gap-2',
+                      dropdown_year: 'flex items-center gap-2',
                       nav: 'flex items-center',
                       nav_button:
                         'flex justify-center items-center h-4 w-4 hover:text-darkGray',

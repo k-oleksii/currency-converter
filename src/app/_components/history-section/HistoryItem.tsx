@@ -1,6 +1,6 @@
-import { IHistory } from '@/app/_util/_types/types';
 import { ICONS } from '@/app/_util/constants';
 import { getIcon } from '@/app/_util/helpers/getIcon';
+import { IHistory } from '@/app/_util/types/types';
 import { FC } from 'react';
 
 const HistoryItem: FC<IHistory> = props => {
