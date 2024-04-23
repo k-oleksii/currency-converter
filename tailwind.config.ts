@@ -16,6 +16,7 @@ const config: Config = {
       blue: '#2c36f2',
       lightBlue: '#2730d9',
       gray: '#707c87',
+      darkRed: '#c23158',
     },
     extend: {
       maxWidth: {
@@ -23,6 +24,7 @@ const config: Config = {
         containerMd: '962px',
         container: '1166px',
       },
+      hoverHistory: {},
     },
   },
   plugins: [],

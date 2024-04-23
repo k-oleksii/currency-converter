@@ -9,6 +9,8 @@ export const fromConvertCurrency = (
   let fromRate = 1,
     toRate = 1;
 
+  if (!isFinite(parseFloat(amount))) return '';
+
   exchangeRates?.forEach((item: IExchangeRateItem) => {
     if (item.cc === fromCurr) {
       fromRate = item.rate;
@@ -30,6 +32,8 @@ export const toConvertCurrency = (
 ) => {
   let fromRate = 1,
     toRate = 1;
+
+  if (!isFinite(parseFloat(amount))) return '';
 
   exchangeRates.forEach((item: IExchangeRateItem) => {
     if (item.cc === toCurrency) {

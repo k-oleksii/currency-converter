@@ -7,7 +7,7 @@ export const getSortData = (data: IHistory[]) => {
       const dateB = new Date(b.date).getTime();
       return dateB - dateA;
     })
-    .slice(0, 8);
+    .slice(0, 10);
 
   return sortData;
 };

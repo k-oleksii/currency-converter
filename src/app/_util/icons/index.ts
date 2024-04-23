@@ -5,6 +5,8 @@ import { IconCabinet } from './IconCabinet';
 import { IconCalendar } from './IconCalendar';
 import { IconCall } from './IconCall';
 import { IconChevronDown } from './IconChevronDown';
+import { IconClose } from './IconClose';
+import { IconEmpty } from './IconEmpty';
 import { IconFb } from './IconFb';
 import { IconInst } from './IconInst';
 import { IconPhone } from './IconPhone';
@@ -27,4 +29,6 @@ export const icons: IIcons = {
   calendar: IconCalendar,
   chevronDown: IconChevronDown,
   arrow: IconArrow,
+  empty: IconEmpty,
+  close: IconClose,
 };

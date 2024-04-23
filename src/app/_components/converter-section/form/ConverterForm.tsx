@@ -5,19 +5,24 @@ import {
   fromConvertCurrency,
   toConvertCurrency,
 } from '@/app/_util/helpers/converter';
+import { getGenerateID } from '@/app/_util/helpers/getGenerateId';
 import { getIcon } from '@/app/_util/helpers/getIcon';
 import { useGetExchangeData } from '@/app/_util/hooks/useGetExchangeData';
+import { useHistoryStore } from '@/app/_util/store/history';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { FC, useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import Button from '../../button/Button';
 import { DatePicker } from '../../form-elements/DatePicker';
 import { Input } from '../../form-elements/Input';
 import { CustomSelect } from '../../form-elements/Select';
+import { CurrencySchema } from './config';
 
 const ConverterForm: FC = () => {
   const [currentField, setCurrentField] = useState<null | string>(null);
   const [date, setDate] = useState<Date>(new Date());
   const exchangeData = useGetExchangeData(date);
+  const { addHistory } = useHistoryStore();
 
   const methods = useForm({
     mode: 'onTouched',
@@ -32,9 +37,15 @@ const ConverterForm: FC = () => {
       },
       date: new Date(),
     },
+    resolver: zodResolver(CurrencySchema),
   });
 
-  const { watch, setValue, handleSubmit } = methods;
+  const {
+    watch,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+  } = methods;
 
   const fromCurr = watch('from');
   const toCurr = watch('to');
@@ -78,12 +89,14 @@ const ConverterForm: FC = () => {
   };
 
   const onSubmit = (data: any) => {
-    console.log('form data', data);
+    const id = getGenerateID();
+
+    addHistory({ id, ...data });
   };
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
         <div className="flex items-center gap-x-12">
           <div className="flex flex-col flex-1 gap-y-[30px]">
             <span className="font-medium font-xl text-gray">В мене є:</span>
@@ -145,6 +158,23 @@ const ConverterForm: FC = () => {
             </div>
           </div>
         </div>
+        {errors.from?.curr || errors.to?.curr ? (
+          <div className="flex flex-col gap-2">
+            {errors.from?.curr && (
+              <span className="text-darkRed text-sm">
+                Поле <strong>"В мене є:"</strong> - {errors.from?.curr.message}
+              </span>
+            )}
+            {errors.to?.curr && (
+              <span className="text-darkRed text-sm">
+                Поле <strong>"Хочу придбати:"</strong> -{' '}
+                {errors.to?.curr.message}
+              </span>
+            )}
+          </div>
+        ) : (
+          ''
+        )}
       </form>
     </FormProvider>
   );
